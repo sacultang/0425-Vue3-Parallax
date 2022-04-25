@@ -18,6 +18,8 @@ export default {
 </script>
 
 <style>
+/* font-family */
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@100;400;700&family=Noto+Sans+KR:wght@100;400&family=Roboto+Condensed:wght@300;400;700&display=swap');
 body {
 	background-color: #222;
 	color: #dddddd;
