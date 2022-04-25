@@ -1,3 +1,4 @@
+import _throttle from 'lodash/throttle'
 export default {
 	namespaced: true,
 	state: () => {
@@ -9,7 +10,7 @@ export default {
 				{ number: '04', section: 'Section4', img: 'https://webstoryboy.github.io/wtss/refer-effect/assets/img/bg4.jpg', text: '높은 목표를 세우고, 스스로를 채찍질 한다' },
 				{ number: '05', section: 'Section5', img: 'https://webstoryboy.github.io/wtss/refer-effect/assets/img/bg5.jpg', text: '높은 목표를 세우고, 스스로를 채찍질 한다' },
 			],
-			// reveal: '',
+			// reveal: document.querySelectorAll('.reveal'),
 			// windowTop: '',
 		}
 	},
@@ -22,20 +23,26 @@ export default {
 	},
 	actions: {
 		onScroll() {
-			this.windowTop = window.scrollY
-			const reveal = document.querySelectorAll('.reveal')
-			reveal.forEach((el) => {
-				const revealDelay = el.dataset.delay
-				if (this.windowTop > el.parentElement.offsetTop - 800) {
-					if (revealDelay === undefined) {
-						el.classList.add('show')
-					} else {
-						setTimeout(() => {
-							el.classList.add('show')
-						}, revealDelay)
-					}
-				}
-			})
+			window.addEventListener(
+				'scroll',
+				_throttle(function () {
+					const reveal = document.querySelectorAll('.reveal')
+					this.windowTop = window.scrollY
+					// console.log(this.windowTop)
+					reveal.forEach((el) => {
+						const revealDelay = el.dataset.delay
+						if (this.windowTop > el.parentElement.offsetTop - 1000) {
+							if (revealDelay === undefined) {
+								el.classList.add('show')
+							} else {
+								setTimeout(() => {
+									el.classList.add('show')
+								}, revealDelay)
+							}
+						}
+					})
+				}, 300)
+			)
 		},
 	},
 }

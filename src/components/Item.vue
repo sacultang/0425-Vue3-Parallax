@@ -5,7 +5,7 @@
 		<figure class="content__item__imgwrap reveal">
 			<div class="content__item__img" :style="{ backgroundImage: `url(${item.img})` }"></div>
 		</figure>
-		<p class="content__item__desc reveal" data-delay="500">{{ item.text }}</p>
+		<p class="content__item__desc reveal" data-delay="200">{{ item.text }}</p>
 	</section>
 </template>
 
@@ -16,16 +16,12 @@ export default {
 		return {}
 	},
 	mounted() {
-		window.addEventListener('scroll', this.onScroll)
+		this.$store.dispatch('item/onScroll')
 	},
 	computed: {
 		...mapState('item', ['items']),
 	},
-	methods: {
-		onScroll() {
-			this.$store.dispatch('item/onScroll')
-		},
-	},
+	methods: {},
 }
 </script>
 
@@ -84,9 +80,9 @@ export default {
 .reveal.show > span {
 	animation: opacity 500ms linear forwards;
 }
-.reveal {
+/* .reveal {
 	position: relative;
-}
+} */
 .reveal::before {
 	content: '';
 	position: absolute;
